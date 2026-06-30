@@ -1,5 +1,6 @@
-﻿from pages.base_page import BasePage
+from pages.base_page import BasePage
 from locators.user_account_locators import UserAccountLocators as UAL
+from data.urls.py import ACCOUNT_PROFILE_PATH, ACCOUNT_HISTORY_PATH
 import allure
 
 class UserAccountPage(BasePage):
@@ -18,10 +19,10 @@ class UserAccountPage(BasePage):
 
     @allure.step("Открыть историю заказов и получить номер последнего заказа")
     def get_last_order_id(self):
-        self.check_url("/account/profile")
+        self.check_url(ACCOUNT_PROFILE_PATH)
 
         self.click_history_orders()
-        self.check_url("/account/order-history")
+        self.check_url(ACCOUNT_HISTORY_PATH)
 
         return self.get_and_return_id_order_in_history()
 
