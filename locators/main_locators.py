@@ -21,3 +21,5 @@ class MainLocators:
     ID_ORDER_TEXT = (By.XPATH, "//p[text()='идентификатор заказа']")
     CLOSE_ORDER = (By.XPATH, "//button[contains(@class, 'Modal_modal__close_')]")
 
+    MODAL_WINDOW = (By.XPATH, "//div[@class='Modal_modal_overlay__x2ZCr']")
+

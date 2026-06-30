@@ -10,6 +10,14 @@ class OrderFeedLocators:
 
     ORDER_IN_WORK = (By.XPATH, "//ul[contains(@class, 'OrderFeed_orderListReady')]/li")
 
+    @staticmethod
+    def order_by_number(order_number):
+        return (By.XPATH,f"//p[contains(text(), '{order_number}')]")
+
+    @staticmethod
+    def order_in_work_by_number(work_number):
+        return (By.XPATH, f"//ul[contains(@class, 'OrderFeed_orderListReady')]/li[contains(., '{work_number}')]")
+
     
 
 

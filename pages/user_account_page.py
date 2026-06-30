@@ -1,25 +1,23 @@
-from pages.base_page import BasePage
-from locators.login_locators import LoginLocators as LL
-from locators.main_locators import MainLocators as ML
+﻿from pages.base_page import BasePage
 from locators.user_account_locators import UserAccountLocators as UAL
+import allure
 
 class UserAccountPage(BasePage):
 
-    def click_account(self):
-        self.click_element(ML.USER_ACCOUNT_LINK)
-        self.wait_overlay_disappear(LL.MODAL_WINDOW)
-
+    @allure.step("Перейти в раздел «История заказов»")
     def click_history_orders(self):
         self.click_element(UAL.HISTORY_ORDERS)
 
+    @allure.step("Нажать кнопку «Выход»")
     def click_logout(self):
         self.click_element(UAL.LOGOUT_ACCOUNT)
 
+    @allure.step("Получить номер последнего заказа из истории")
     def get_and_return_id_order_in_history(self):
         return self.get_text(UAL.ID_FIRST_ORDER_IN_HISTORY)
 
+    @allure.step("Открыть историю заказов и получить номер последнего заказа")
     def get_last_order_id(self):
-        self.click_account()
         self.check_url("/account/profile")
 
         self.click_history_orders()

@@ -1,6 +1,11 @@
 ﻿import allure
 from pages.main_page import MainPage
 from pages.login_page import LoginPage
+from data.ui_text import (
+    HEADER_CONSTRUCTOR,
+    HEADER_ORDER_FEED,
+    HEADER_INGREDIENT_DETAILS
+)
 
 class TestMainFunc:
 
@@ -9,11 +14,12 @@ class TestMainFunc:
     def test_go_to_constructor(self, driver):
 
         main_page = MainPage(driver)
+        login_page = LoginPage(driver)
 
-        main_page.open_login_page()
+        login_page.open_login_page()
         main_page.click_constructor()
 
-        assert main_page.get_header_constructor() == 'Соберите бургер'
+        assert main_page.get_header_constructor() == HEADER_CONSTRUCTOR
 
     @allure.title("Тест: переход в раздел «Лента заказов»")
     @allure.step("Открыть раздел «Лента заказов»")
@@ -23,7 +29,7 @@ class TestMainFunc:
 
         main_page.click_lenta_orders()
 
-        assert main_page.get_header_lenta_order() == 'Лента заказов'
+        assert main_page.get_header_lenta_order() == HEADER_ORDER_FEED
 
     @allure.title("Тест: открытие окна с деталями ингредиента")
     @allure.step("Открыть модальное окно с деталями ингредиента")
@@ -33,7 +39,7 @@ class TestMainFunc:
 
         main_page.click_ingredient()
         
-        assert main_page.get_header_ingredient_details() == 'Детали ингредиента'
+        assert main_page.get_header_ingredient_details() == HEADER_INGREDIENT_DETAILS
 
     @allure.title("Тест: закрытие окна с деталями ингредиента")
     @allure.step("Открыть и закрыть модальное окно с деталями ингредиента")
@@ -59,9 +65,9 @@ class TestMainFunc:
 
     @allure.title("Тест: авторизованный пользователь может оформить заказ")
     @allure.step("Авторизоваться и оформить заказ")
-    def test_create_order_authorized_user(self, driver, authorized_user):
+    def test_create_order_registered_user(self, driver, registered_user):
         login_page = LoginPage(driver)
-        login_page.login_user(authorized_user)
+        login_page.login_user(registered_user)
 
         main_page = MainPage(driver)
         main_page.add_bun_in_busket()

@@ -1,20 +1,18 @@
 ﻿import allure
 from pages.base_page import BasePage
-from locators.login_locators import LoginLocators as LL
 from locators.main_locators import MainLocators as ML
-from data.urls import LOGIN_USER
 
 class MainPage(BasePage):
 
-    @allure.step("Переход на страницу логина")
-    def open_login_page(self):
-        self.open(LOGIN_USER)
-        self.wait_overlay_disappear(LL.MODAL_WINDOW)
+    @allure.step("Клик на Личный кабинет")
+    def click_account(self):
+        self.click_element(ML.USER_ACCOUNT_LINK)
+        self.wait_overlay_disappear(ML.MODAL_WINDOW)
 
     @allure.step("Клик на конструктор")
     def click_constructor(self):
         self.click_element(ML.BURGER_CONSTRUCTOR)
-        self.wait_overlay_disappear(LL.MODAL_WINDOW)
+        self.wait_overlay_disappear(ML.MODAL_WINDOW)
 
     @allure.step("Получить заголовок конструктора")
     def get_header_constructor(self):
@@ -23,7 +21,7 @@ class MainPage(BasePage):
     @allure.step("Клик на ленту заказов")
     def click_lenta_orders(self):
         self.click_element(ML.LENTA_ORDERS)
-        self.wait_overlay_disappear(LL.MODAL_WINDOW)
+        self.wait_overlay_disappear(ML.MODAL_WINDOW)
 
     @allure.step("Получить заголовок ленты заказов")
     def get_header_lenta_order(self):
@@ -66,5 +64,5 @@ class MainPage(BasePage):
     @allure.step("Закрыть модалку 'Заказ оформлен'")
     def close_window_ordered(self):
         self.js_click(ML.CLOSE_ORDER)
-        self.wait_overlay_disappear(LL.MODAL_WINDOW)
+        self.wait_overlay_disappear(ML.MODAL_WINDOW)
 

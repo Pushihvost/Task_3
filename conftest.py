@@ -5,7 +5,7 @@ from api.user_api import UserApi
 from helpers.generators import generate_user
 
 @pytest.fixture
-def authorized_user():
+def registered_user():
 
     user_api = UserApi()
 

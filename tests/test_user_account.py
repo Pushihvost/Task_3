@@ -1,41 +1,53 @@
 from pages.user_account_page import UserAccountPage
 from pages.login_page import LoginPage
-from data.urls import USER_ACCOUNT, HISTORY_ORDERS, LOGIN_USER
+from pages.main_page import MainPage
+from data.urls import USER_ACCOUNT, HISTORY_ORDERS, LOGIN_USER, LOGIN_PATH, ACCOUNT_PROFILE_PATH, ACCOUNT_HISTORY_PATH
+import allure
 
 class TestUserAccount:
-    def test_go_to_user_account(self, driver, authorized_user):
+
+    @allure.title("Тест: переход в личный кабинет")
+    @allure.step("Авторизоваться и перейти в личный кабинет")
+    def test_go_to_user_account(self, driver, registered_user):
+        main_page = MainPage(driver)
         login_page = LoginPage(driver)
-        login_page.login_user(authorized_user)
+        login_page.login_user(registered_user)
 
         user_acc = UserAccountPage(driver)
-        user_acc.click_account()
-        user_acc.check_url('/account/profile')
+        main_page.click_account()
+        user_acc.check_url(ACCOUNT_PROFILE_PATH)
 
         assert user_acc.get_url() == USER_ACCOUNT
 
-    def test_go_to_history_orders(self, driver, authorized_user):
+    @allure.title("Тест: переход в историю заказов")
+    @allure.step("Авторизоваться, открыть личный кабинет и перейти в историю заказов")
+    def test_go_to_history_orders(self, driver, registered_user):
+        main_page = MainPage(driver)
         login_page = LoginPage(driver)
-        login_page.login_user(authorized_user)
+        login_page.login_user(registered_user)
 
         user_acc = UserAccountPage(driver)
-        user_acc.click_account()
-        user_acc.check_url('/account/profile')
+        main_page.click_account()
+        user_acc.check_url(ACCOUNT_PROFILE_PATH)
 
         user_acc.click_history_orders()
-        user_acc.check_url('/account/order-history')
+        user_acc.check_url(ACCOUNT_HISTORY_PATH)
 
         assert user_acc.get_url() == HISTORY_ORDERS
 
-    def test_logout_account(self, driver, authorized_user):
+    @allure.title("Тест: выход из личного кабинета")
+    @allure.step("Авторизоваться и выйти из личного кабинета")
+    def test_logout_account(self, driver, registered_user):
+        main_page = MainPage(driver)
         login_page = LoginPage(driver)
-        login_page.login_user(authorized_user)
+        login_page.login_user(registered_user)
 
         user_acc = UserAccountPage(driver)
-        user_acc.click_account()
-        user_acc.check_url('/account/profile')
+        main_page.click_account()
+        user_acc.check_url(ACCOUNT_PROFILE_PATH)
 
         user_acc.click_logout()
 
-        user_acc.check_url('/login')
+        user_acc.check_url(LOGIN_PATH)
 
         assert user_acc.get_url() == LOGIN_USER

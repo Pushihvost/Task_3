@@ -1,16 +1,16 @@
 BASE_URL = "https://qa-stellarburgers.education-services.ru"
 
-# Auth
-REGISTER_USER = f"{BASE_URL}/register"
-LOGIN_USER = f"{BASE_URL}/login"
+LOGIN_PATH = "/login"
+FORGOT_PASSWORD_PATH = "/forgot-password"
+RESET_PASSWORD_PATH = "/reset-password"
+ACCOUNT_PROFILE_PATH = "/account/profile"
+ACCOUNT_HISTORY_PATH = "/account/order-history"
 
-#Reset password
-FORGOT_PASSWORD = f"{BASE_URL}/forgot-password"
-RESET_PASSWORD = f"{BASE_URL}/reset-password"
-
-#Account
-USER_ACCOUNT = f"{BASE_URL}/account/profile"
-HISTORY_ORDERS = f"{BASE_URL}/account/order-history"
+LOGIN_USER = f"{BASE_URL}{LOGIN_PATH}"
+FORGOT_PASSWORD = f"{BASE_URL}{FORGOT_PASSWORD_PATH}"
+RESET_PASSWORD = f"{BASE_URL}{RESET_PASSWORD_PATH}"
+USER_ACCOUNT = f"{BASE_URL}{ACCOUNT_PROFILE_PATH}"
+HISTORY_ORDERS = f"{BASE_URL}{ACCOUNT_HISTORY_PATH}"
 
 
 
